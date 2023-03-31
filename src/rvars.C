@@ -24,7 +24,7 @@ namespace rvars {
 		 std::vector<void*> memory)
   {
     if(suffix.size()!=memory.size()){
-      std::cerr<< "!*! Contaier size of branch suffix != Container size of branch memory!" << std::endl;
+      std::cerr<< "!*! Container size of branch suffix != Container size of branch memory!" << std::endl;
       throw;
     }
     T->SetMakeClass(1); // Allows access to individual sub-branchs
@@ -43,7 +43,7 @@ namespace rvars {
   		 int ndatavarpos)
   {
     if(suffix.size()!=memory.size()){
-      std::cerr<< "!*! Contaier size of branch suffix != Container size of branch memory!" << std::endl;
+      std::cerr<< "!*! Container size of branch suffix != Container size of branch memory!" << std::endl;
       throw;
     }
     T->SetMakeClass(1); // Allows access to individual sub-branchs
@@ -68,7 +68,7 @@ namespace rvars {
   		 std::vector<int> ndatapos)
   {
     if(suffix.size()!=memory.size()){
-      std::cerr<< "!*! Contaier size of branch suffix != Container size of branch memory!" << std::endl;
+      std::cerr<< "!*! Container size of branch suffix != Container size of branch memory!" << std::endl;
       throw;
     }
     T->SetMakeClass(1); // Allows access to individual sub-branchs

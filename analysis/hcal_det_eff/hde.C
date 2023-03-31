@@ -23,8 +23,7 @@
 #include <TSystem.h>
 #include <TStopwatch.h>
 #include "TMath.h"
-#include "../src/vars.C" 
-#include "../src/fits.C"
+#include "../include/gmn.h"
 
 //Configure total fits for this application. Component fits in gmna.h
 Double_t Tfit_hcal(Double_t *x, Double_t *par){ //4 order poly fit for HCal bg

@@ -1,4 +1,4 @@
-//sseeds 03.28.23 - script designed to loop over all events in E tree and generate avg beam E per run/evt
+//sseeds 03.28.23 - script adapted from P.Datta designed to loop over all events in E tree and generate avg beam E per run/evt
 
 #include <vector>
 #include <iostream>
@@ -24,7 +24,7 @@ Int_t getmeanE( Int_t kine = 9, Int_t nruns = -1, const char* targ = "lh2" )
     std::cout << "Error: enter a valid kinematic." << std::endl;
     return 0;
   }
-  Int_t verb = 0;
+  Int_t verb = 1;
 
   // read relevant run info from relevant good runlist spreadsheet
   std::string runsheet_dir = jmgr->GetValueFromKey_str("runsheet_dir");

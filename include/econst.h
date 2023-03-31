@@ -2,6 +2,8 @@
 #define ECONST_H
 
 #include <iostream>
+#include <string>
+#include <fstream>
 #include "TMath.h"
 #include "TString.h"
 
@@ -30,7 +32,7 @@ namespace econst {
   static const Double_t hcalposYi = -0.931545;    //m, distance from beam center to opposite-beam side of HCal
   static const Double_t hcalposYf = 0.931545;     //m, distance from beam center to beam side of HCal
   // Global
-  static const Double_t hcalheight = 0.2897;      //m, height of the center of hcal above beam (m)
+  static const Double_t hcalheight = -0.2897;      //m, height of the center of hcal above beam (m)
 
   // BBCAL
   static const Int_t shchan = 189;
@@ -61,31 +63,31 @@ namespace econst {
   static const Double_t aldEdx = 0.0021; //According to NIST ESTAR, the collisional stopping power of Aluminum is about 2.1 MeV*cm2/g between 1-4 GeV
 
   // Following quantities vary with configuration
-  Double_t ebeam(Int_t config);     //GeV
-  Double_t bbtheta(Int_t config);   //deg
-  Double_t bbdist(Int_t config);    //m
-  Double_t sbstheta(Int_t config);  //deg
-  Double_t sbsdist(Int_t config);   //m
-  Double_t hcaltheta(Int_t config); //deg
-  Double_t hcaldist(Int_t config);  //m
+  Double_t     ebeam(Int_t config);        //GeV
+  Double_t     bbtheta(Int_t config);      //deg
+  Double_t     bbdist(Int_t config);       //m
+  Double_t     sbstheta(Int_t config);     //deg
+  Double_t     sbsdist(Int_t config);      //m
+  Double_t     hcaltheta(Int_t config);    //deg
+  Double_t     hcaldist(Int_t config);     //m
 }
 
 // a class for SBS config
 class SBSconfig {
  public:
 
-  Int_t    GetSBSconf()       const { return fSBSconf; }
-  Int_t    GetSBSmag()        const { return fSBSmag; }
-  Double_t GetEbeam()         const { return fEbeam; }
-  Double_t GetBBtheta()       const { return fBBtheta; }
-  Double_t GetBBtheta_rad()   const { return fBBtheta_rad; }
-  Double_t GetBBdist()        const { return fBBdist; }
-  Double_t GetSBStheta()      const { return fSBStheta; }
-  Double_t GetSBStheta_rad()  const { return fSBStheta_rad; }
-  Double_t GetSBSdist()       const { return fSBSdist; }
-  Double_t GetHCALtheta()     const { return fHCALtheta; }
-  Double_t GetHCALtheta_rad() const { return fHCALtheta_rad; }
-  Double_t GetHCALdist()      const { return fHCALdist; }
+  Int_t        GetSBSconf()       const { return fSBSconf; }
+  Int_t        GetSBSmag()        const { return fSBSmag; }
+  Double_t     GetEbeam()         const { return fEbeam; }
+  Double_t     GetBBtheta()       const { return fBBtheta; }
+  Double_t     GetBBtheta_rad()   const { return fBBtheta_rad; }
+  Double_t     GetBBdist()        const { return fBBdist; }
+  Double_t     GetSBStheta()      const { return fSBStheta; }
+  Double_t     GetSBStheta_rad()  const { return fSBStheta_rad; }
+  Double_t     GetSBSdist()       const { return fSBSdist; }
+  Double_t     GetHCALtheta()     const { return fHCALtheta; }
+  Double_t     GetHCALtheta_rad() const { return fHCALtheta_rad; }
+  Double_t     GetHCALdist()      const { return fHCALdist; }
 
   // constructor
   SBSconfig(Int_t conf, Int_t sbsmag) {
@@ -105,33 +107,33 @@ class SBSconfig {
 
   // define an ostream operator to print to screen conveniently
   friend ostream& operator <<(ostream &out, const SBSconfig& sbsconf) {
-    out  << " -------------------------- "                         << std::endl
-	 << Form(" SBS Config: %d, "                   , sbsconf.fSBSconf)   << std::endl
-	 << Form(" SBS Magnet Settings: %d (p), "      , sbsconf.fSBSmag)    << std::endl
-    	 << Form(" Beam energy: %0.4f (GeV),"          , sbsconf.fEbeam)     << std::endl
-    	 << Form(" BigBite angle: %0.1f (deg),"        , sbsconf.fBBtheta)   << std::endl
-      	 << Form(" BigBite distance: %0.5f (m),"       , sbsconf.fBBdist)    << std::endl
-    	 << Form(" Super BigBite angle: %0.1f (deg),"  , sbsconf.fSBStheta)  << std::endl
-      	 << Form(" Super BigBite distance: %0.2f (m)," , sbsconf.fSBSdist)   << std::endl
-	 << Form(" HCAL angle: %0.1f (deg),"           , sbsconf.fHCALtheta) << std::endl
-    	 << Form(" HCAL distance: %0.1f (m)"           , sbsconf.fHCALdist)  << std::endl
-	 << " -------------------------- "                        << std::endl << std::endl;
+    out  << " -------------------------- "                                             << std::endl
+	 << Form(" SBS Config: %d, "                   , sbsconf.fSBSconf)             << std::endl
+	 << Form(" SBS Magnet Settings: %d (p), "      , sbsconf.fSBSmag)              << std::endl
+    	 << Form(" Beam energy: %0.4f (GeV),"          , sbsconf.fEbeam)               << std::endl
+    	 << Form(" BigBite angle: %0.1f (deg),"        , sbsconf.fBBtheta)             << std::endl
+      	 << Form(" BigBite distance: %0.5f (m),"       , sbsconf.fBBdist)              << std::endl
+    	 << Form(" Super BigBite angle: %0.1f (deg),"  , sbsconf.fSBStheta)            << std::endl
+      	 << Form(" Super BigBite distance: %0.2f (m)," , sbsconf.fSBSdist)             << std::endl
+	 << Form(" HCAL angle: %0.1f (deg),"           , sbsconf.fHCALtheta)           << std::endl
+    	 << Form(" HCAL distance: %0.1f (m)"           , sbsconf.fHCALdist)            << std::endl
+	 << " -------------------------- "                        << std::endl         << std::endl;
     return out;
   }
 
  private:
-  Int_t    fSBSconf;             // SBS configuration number
-  Int_t    fSBSmag;              // SBS magnet settings (%)
-  Double_t fEbeam;               // beam energy (better to get this from tree) (GeV)
-  Double_t fBBtheta;             // BigBite magnet angle (deg)
-  Double_t fBBtheta_rad;         // BigBite magnet angle (rad)
-  Double_t fBBdist;              // BigBite magnet distance from target (m)
-  Double_t fSBStheta;            // Super BigBite magnet angle (deg)
-  Double_t fSBStheta_rad;        // Super BigBite magnet angle (rad)
-  Double_t fSBSdist;             // Super BigBite magnet distance from target (m)
-  Double_t fHCALtheta;           // HCAL angle (deg)
-  Double_t fHCALtheta_rad;       // HCAL angle (rad)
-  Double_t fHCALdist;            // HCAL distance from target (m)
+  Int_t        fSBSconf;             // SBS configuration number
+  Int_t        fSBSmag;              // SBS magnet settings (%)
+  Double_t     fEbeam;               // beam energy (better to get this from tree) (GeV)
+  Double_t     fBBtheta;             // BigBite magnet angle (deg)
+  Double_t     fBBtheta_rad;         // BigBite magnet angle (rad)
+  Double_t     fBBdist;              // BigBite magnet distance from target (m)
+  Double_t     fSBStheta;            // Super BigBite magnet angle (deg)
+  Double_t     fSBStheta_rad;        // Super BigBite magnet angle (rad)
+  Double_t     fSBSdist;             // Super BigBite magnet distance from target (m)
+  Double_t     fHCALtheta;           // HCAL angle (deg)
+  Double_t     fHCALtheta_rad;       // HCAL angle (rad)
+  Double_t     fHCALdist;            // HCAL distance from target (m)
 };
 
 #endif
